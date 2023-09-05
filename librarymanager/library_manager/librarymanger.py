@@ -18,14 +18,15 @@ class LibraryManager:
                 self.books.remove(book)
                 return True
         return False
-        
+       #change1 
     def get_book_by_name(self, book_name):
         for book in self.books:
-            if book.name == book_name:
+            if book.name.lower() == book_name.lower():
                 print(f"Book '{book_name}' found in LibraryManager.")
                 return book
         print(f"Book '{book_name}' not found in LibraryManager.")
         return None
+
 
     def list_books(self):
         print("Books in LibraryManager:")
@@ -56,8 +57,14 @@ class LibraryManager:
 
 
 
+    def register(self, name, user_id, password):
+        if user_id in self.registered_users:
+            print("User with this ID is already registered. Please choose a different user ID.")
+        else:
+            self.registered_users[user_id] = password
+        print(f"Hello {name}, you are successfully registered in the library!!..")
 
-
+        print("users are:",self.print_registered_users)
 
     def get_book_by_isbn(self, book_isbn):
         for book in self.books:
@@ -97,9 +104,9 @@ password = input("Enter your password: ")
 lm.register(name, user_id, password)
 
 #  Book objects
-book1 = Book("DO EPIC SHIT", "78463738")
-book2 = Book("Python 101", "94857392")
-book3= Book("True love","564738920")
+book1 = Book("DO EPIC SHIT", "12")
+book2 = Book("Python 101", "13")
+book3= Book("True love","14")
 
 # Add books 
 lm.add_book(book1)

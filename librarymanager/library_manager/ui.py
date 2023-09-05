@@ -1,6 +1,6 @@
-# ui.py
 
 
+from library_manager.book import Book
 
 class UserInterface:
     def __init__(self, library_manager):
@@ -28,19 +28,31 @@ class UserInterface:
     def add_book(self):
         isbn = input("Enter the ISBN of the book: ")
         title = input("Enter the title of the book: ")
-       
+   
+        book = Book(title, isbn)
 
-        # Call the appropriate function from library_manager to add the book
-        self.library_manager.add_book(isbn, title)
+    # Call the appropriate function from library_manager to add the book
+        self.library_manager.add_book(book)
         print("Book added successfully!")
 
     def borrow_book(self):
-        isbn = input("Enter the ISBN of the book you want to borrow: ")
-        person_id = input("Enter your person ID: ")
+            person_id = input("Enter your person ID: ")
 
-        # Call the appropriate function from library_manager to borrow the book
-        is_borrowed = self.library_manager.assign_book_to_user(isbn, person_id)
-        if is_borrowed:
-            print("Book borrowed successfully!")
-        else:
-            print("Book not available for borrowing or user not registered.")
+    # Debug: Print registered users
+            print("Registered Users:", self.library_manager.registered_users)
+
+    # Check if the user is registered
+            if not self.library_manager.is_user_registered(person_id):
+                print(f"User with ID '{person_id}' is not registered. Please register first.")
+                return
+
+            isbn = input("Enter the ISBN of the book you want to borrow: ")
+
+    # Call the appropriate function from library_manager to borrow the book
+            is_borrowed = self.library_manager.assign_book_to_user(isbn, person_id)
+            if is_borrowed:
+                 print(f"Book with ISBN '{isbn}' has been assigned to person with ID '{person_id}'.")
+            else:
+                 print("Book not available for borrowing or user not registered.")
+
+  
